@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Courses — Nafees</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#14121b;
+    --panel:#1d1926;
+    --panel-2:#241f30;
+    --line:#312a3f;
+    --ink:#f3efe9;
+    --ink-dim:#c8c0d6;
+    --muted:#948c9f;
+    --gold:#e8a94a;
+    --teal:#4fd1c5;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 800px 500px at 90% -10%, rgba(232,169,74,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 0% 30%, rgba(79,209,197,0.08), transparent 60%);
+  }
+  a{color:inherit;}
+  ::selection{background:var(--gold); color:#1a1206;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .wrap{max-width:860px; margin:0 auto; padding:0 26px; position:relative; z-index:1;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,18,27,0.82); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:860px; margin:0 auto; padding:18px 26px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'Fraunces',serif; font-weight:600; font-size:19px;
+    text-decoration:none; letter-spacing:.01em;
+  }
+  .brand em{ color:var(--gold); font-style:italic; }
+  nav ul{ list-style:none; display:flex; gap:26px; margin:0; padding:0; }
+  nav ul a{
+    text-decoration:none; font-size:14px; color:var(--ink-dim);
+    position:relative; padding-bottom:3px;
+  }
+  nav ul a::after{
+    content:''; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:var(--gold); transform:scaleX(0); transform-origin:right;
+    transition:transform .25s ease;
+  }
+  nav ul a:hover{ color:var(--ink); }
+  nav ul a:hover::after{ transform:scaleX(1); transform-origin:left; }
+  nav ul li.current a{ color:var(--gold); }
+
+  @media (max-width:560px){
+    .nav-inner{ flex-direction:column; align-items:flex-start; gap:12px; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:76px 0 46px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.12em;
+    color:var(--teal); text-transform:uppercase; margin:0 0 18px;
+  }
+  h1{
+    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(2.2rem,5vw,3.2rem);
+    margin:0 0 26px; letter-spacing:-.01em; color:var(--ink);
+  }
+  .pull{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    font-size:clamp(1.1rem,2.4vw,1.3rem); color:var(--ink-dim);
+    max-width:46ch; border-left:2px solid var(--gold); padding-left:22px;
+    margin:0;
+  }
+
+  section{ padding-bottom:56px; }
+  .section-label{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);
+    letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;
+  }
+  h2{ font-family:'Fraunces',serif; font-weight:600; font-size:1.6rem; margin:0; }
+
+  /* ---------- track (staged curriculum) ---------- */
+  .track{ position:relative; padding-left:32px; margin-bottom:46px; }
+  .track:last-child{ margin-bottom:0; }
+  .track::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:-46px; width:1px;
+    background:var(--line);
+  }
+  .track:last-child::before{ display:none; }
+  .track::after{
+    content:''; position:absolute; left:0; top:2px; width:11px; height:11px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--gold);
+  }
+  .track-head{ display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+  .track-stage{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.05em; }
+  .track-title{ font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; margin:0; }
+  .track-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--teal);
+    border:1px solid #1f4a45; padding:2px 8px; border-radius:6px;
+  }
+  .track-note{ font-size:13.5px; color:var(--muted); margin:6px 0 16px; max-width:56ch; }
+
+  .course-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  @media (max-width:700px){ .course-grid{ grid-template-columns:1fr; } }
+
+  .course-link{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:15px 17px; background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    text-decoration:none; color:var(--ink); font-size:14px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .course-link:hover{ border-color:var(--gold); transform:translateX(3px); }
+  .course-link .arrow{ font-family:'IBM Plex Mono',monospace; color:var(--muted); }
+  .course-link:hover .arrow{ color:var(--gold); }
+
+  /* ---------- reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  footer{ border-top:1px solid var(--line); padding:24px 0 34px; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+  .footer-row p{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); margin:0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="home" class="brand">nafees<em>.</em>dev</a>
+    <nav>
+      <ul>
+        <li><a href="home">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li class="current"><a href="courses">Courses</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="padding-bottom:0;">
+    <p class="eyebrow reveal in">the full curriculum</p>
+    <h1 class="reveal in">One stage feeds the next.</h1>
+    <p class="pull reveal in">DevOps is development and operations folded into one continuous loop. This curriculum is built the same way — each stage assumes the one before it, so start at the top even if you're tempted to skip ahead.</p>
+  </section>
+
+  <section>
+    <div class="track reveal">
+      <div class="track-head">
+        <span class="track-stage">STAGE 01</span>
+        <h3 class="track-title">Fundamentals</h3>
+        <span class="track-badge">start here</span>
+      </div>
+      <p class="track-note">Linux, Git and networking — the parts everyone skips and everyone regrets skipping.</p>
+      <div class="course-grid">
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvIKMhk8WhzN1pYoJ1YU8Csa" target="_blank" rel="noopener">DevOps Zero to Hero <span class="arrow">→</span></a>
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvKv4MFW35XRskZbQbrt6ep-" target="_blank" rel="noopener">Networking Fundamentals <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="track reveal">
+      <div class="track-head">
+        <span class="track-stage">STAGE 02</span>
+        <h3 class="track-title">Cloud &amp; Infrastructure as Code</h3>
+        <span class="track-badge">core</span>
+      </div>
+      <p class="track-note">Where most job descriptions actually live: provisioning real infrastructure and not touching a console to do it.</p>
+      <div class="course-grid">
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvLNOxX0RfndiYSt1Le9azze" target="_blank" rel="noopener">AWS Zero to Hero <span class="arrow">→</span></a>
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvIcxgCUyBHVOcWs0Krjx9xR" target="_blank" rel="noopener">Azure Zero to Hero <span class="arrow">→</span></a>
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvI0O4PeKVV1-yJoX2AqIWuf" target="_blank" rel="noopener">Terraform Zero to Hero <span class="arrow">→</span></a>
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvKwTyYNJCUwGPvql0TrsPgv" target="_blank" rel="noopener">Python Zero to Hero <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="track reveal">
+      <div class="track-head">
+        <span class="track-stage">STAGE 03</span>
+        <h3 class="track-title">Automation &amp; GitOps</h3>
+        <span class="track-badge">advanced</span>
+      </div>
+      <p class="track-note">The patterns that let a team ship without everything routing through one person's laptop.</p>
+      <div class="course-grid">
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvLxd5nmtmORCmhD5jkrNbuE" target="_blank" rel="noopener">Ansible Zero to Hero <span class="arrow">→</span></a>
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvKu7OZpgj1-MzJFqZ8RBp6f" target="_blank" rel="noopener">GitOps Zero to Hero <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="track reveal">
+      <div class="track-head">
+        <span class="track-stage">STAGE 04</span>
+        <h3 class="track-title">Operations &amp; Troubleshooting</h3>
+        <span class="track-badge">on-call</span>
+      </div>
+      <p class="track-note">Because eventually something breaks at the worst possible time, and reading the docs calmly is not an option.</p>
+      <div class="course-grid">
+        <a class="course-link" href="https://www.youtube.com/playlist?list=PLdpzxOOAlwvIrFBI1farpLS_OSUBXJMLX" target="_blank" rel="noopener">Troubleshooting Kubernetes <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-row">
+    <p>© Nafees — built with more coffee than sleep</p>
+    <p>Subscribe for weekly DevOps drops</p>
+  </div>
+</footer>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealEls = document.querySelectorAll('.reveal');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealEls.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => io.observe(el));
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Nafees</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#14121b;
+    --panel:#1d1926;
+    --panel-2:#241f30;
+    --line:#312a3f;
+    --ink:#f3efe9;
+    --ink-dim:#c8c0d6;
+    --muted:#948c9f;
+    --gold:#e8a94a;
+    --teal:#4fd1c5;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 800px 500px at 90% -10%, rgba(232,169,74,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 0% 30%, rgba(79,209,197,0.08), transparent 60%);
+  }
+  a{color:inherit;}
+  ::selection{background:var(--gold); color:#1a1206;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .wrap{max-width:860px; margin:0 auto; padding:0 26px; position:relative; z-index:1;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,18,27,0.82); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:860px; margin:0 auto; padding:18px 26px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'Fraunces',serif; font-weight:600; font-size:19px;
+    text-decoration:none; letter-spacing:.01em;
+  }
+  .brand em{ color:var(--gold); font-style:italic; }
+  nav ul{ list-style:none; display:flex; gap:26px; margin:0; padding:0; }
+  nav ul a{
+    text-decoration:none; font-size:14px; color:var(--ink-dim);
+    position:relative; padding-bottom:3px;
+  }
+  nav ul a::after{
+    content:''; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:var(--gold); transform:scaleX(0); transform-origin:right;
+    transition:transform .25s ease;
+  }
+  nav ul a:hover{ color:var(--ink); }
+  nav ul a:hover::after{ transform:scaleX(1); transform-origin:left; }
+  nav ul li.current a{ color:var(--gold); }
+
+  @media (max-width:560px){
+    .nav-inner{ flex-direction:column; align-items:flex-start; gap:12px; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:76px 0 50px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.12em;
+    color:var(--teal); text-transform:uppercase; margin:0 0 18px;
+  }
+  h1{
+    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(2.2rem,5vw,3.2rem);
+    margin:0 0 26px; letter-spacing:-.01em; color:var(--ink);
+  }
+  .pull{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    font-size:clamp(1.1rem,2.4vw,1.3rem); color:var(--ink-dim);
+    max-width:42ch; border-left:2px solid var(--gold); padding-left:22px;
+    margin:0 0 6px;
+  }
+
+  section{ padding-bottom:60px; }
+  .section-label{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);
+    letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;
+  }
+  h2{
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.6rem; margin:0 0 30px;
+  }
+
+  /* ---------- primary contact card ---------- */
+  .contact-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:34px 32px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;
+    margin-bottom:60px;
+  }
+  @media (max-width:640px){ .contact-card{ grid-template-columns:1fr; } }
+  .contact-card h3{ font-family:'Inter'; font-size:16.5px; font-weight:600; margin:0 0 8px; color:var(--ink); }
+  .contact-card p{ font-size:13.8px; color:var(--muted); margin:0; max-width:44ch; }
+  .contact-card .badge{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--teal);
+    border:1px solid #1f4a45; padding:2px 8px; border-radius:6px; margin-bottom:12px; display:inline-block;
+  }
+
+  .btn{
+    font-family:'IBM Plex Mono',monospace; font-size:13px;
+    display:inline-flex; align-items:center; gap:9px; white-space:nowrap;
+    padding:13px 22px; border-radius:9px; text-decoration:none;
+    border:1px solid var(--line); color:var(--ink);
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .btn:hover{ border-color:var(--gold); transform:translateY(-1px); background:var(--panel-2); }
+  .btn-primary{ background:var(--gold); border-color:var(--gold); color:#1a1206; font-weight:600; }
+  .btn-primary:hover{ background:#f4bb6a; }
+  .btn-primary::after{ content:'→'; transition:transform .15s ease; }
+  .btn-primary:hover::after{ transform:translateX(3px); }
+
+  /* ---------- before-you-ask list ---------- */
+  .ask-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:60px; }
+  @media (max-width:700px){ .ask-grid{ grid-template-columns:1fr; } }
+  .ask-item{
+    background:var(--panel); border:1px solid var(--line); border-radius:11px;
+    padding:18px 20px; transition:border-color .2s ease, transform .2s ease;
+  }
+  .ask-item:hover{ border-color:var(--teal); transform:translateY(-2px); }
+  .ask-q{ font-size:14px; font-weight:600; color:var(--ink); margin:0 0 6px; }
+  .ask-a{ font-size:13px; color:var(--muted); margin:0; }
+
+  /* ---------- expectations strip ---------- */
+  .expect-row{
+    display:flex; gap:36px; flex-wrap:wrap; padding:26px 0;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    margin-bottom:60px;
+  }
+  .expect-item{ display:flex; align-items:baseline; gap:10px; }
+  .expect-item b{ font-family:'Fraunces',serif; font-size:1.4rem; color:var(--ink); }
+  .expect-item span{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+
+  /* ---------- reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  footer{ border-top:1px solid var(--line); padding:24px 0 34px; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+  .footer-row p{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); margin:0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="home" class="brand">nafees<em>.</em>dev</a>
+    <nav>
+      <ul>
+        <li><a href="home">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li class="current"><a href="contact">Contact</a></li>
+        <li><a href="courses">Courses</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="padding-bottom:0;">
+    <p class="eyebrow reveal in">stuck on something?</p>
+    <h1 class="reveal in">Let's get you unstuck.</h1>
+    <p class="pull reveal in">Every learner hits the same wall at some point — a Terraform state error, a pod that won't come up, a pipeline that fails for no visible reason. There's a whole community that's already been there.</p>
+  </section>
+
+  <section>
+    <div class="contact-card reveal">
+      <div>
+        <span class="badge">members-only · free</span>
+        <h3>Join the Slack community</h3>
+        <p>Ask questions, share what broke, and see how other learners on the same path solved it before you.</p>
+      </div>
+      <a href="https://www.youtube.com/abhishekVeeramalla/join" class="btn btn-primary" target="_blank" rel="noopener">Join Slack</a>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label reveal">before you post</p>
+    <h2 class="reveal">The questions that come up every week</h2>
+    <div class="ask-grid">
+      <div class="ask-item reveal">
+        <p class="ask-q">"My docker-compose won't start."</p>
+        <p class="ask-a">Almost always a port conflict or a missing depends_on. Check the pinned thread first.</p>
+      </div>
+      <div class="ask-item reveal">
+        <p class="ask-q">"Terraform state is out of sync."</p>
+        <p class="ask-a">Common after a manual console change. There's a walkthrough for safely re-importing state.</p>
+      </div>
+      <div class="ask-item reveal">
+        <p class="ask-q">"Which cloud should I learn first?"</p>
+        <p class="ask-a">AWS if you're job-hunting broadly, Azure if your target companies already run on it.</p>
+      </div>
+      <div class="ask-item reveal">
+        <p class="ask-q">"A pod is stuck in CrashLoopBackOff."</p>
+        <p class="ask-a">Start with `kubectl logs --previous`. Nine times out of ten, the answer is in there.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="expect-row reveal">
+      <div class="expect-item"><b>&lt;24h</b><span>typical reply time</span></div>
+      <div class="expect-item"><b>100%</b><span>free to join</span></div>
+      <div class="expect-item"><b>1</b><span>rule: search before you ask</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-row">
+    <p>© Nafees — built with more coffee than sleep</p>
+    <p>Subscribe for weekly DevOps drops</p>
+  </div>
+</footer>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealEls = document.querySelectorAll('.reveal');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealEls.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  });
+</script>
+
+</body>
+</html>

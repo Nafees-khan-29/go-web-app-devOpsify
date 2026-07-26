@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Nafees</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#14121b;
+    --panel:#1d1926;
+    --panel-2:#241f30;
+    --line:#312a3f;
+    --ink:#f3efe9;
+    --ink-dim:#c8c0d6;
+    --muted:#948c9f;
+    --gold:#e8a94a;
+    --teal:#4fd1c5;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 800px 500px at 10% -10%, rgba(232,169,74,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 20%, rgba(79,209,197,0.08), transparent 60%);
+  }
+  a{color:inherit;}
+  ::selection{background:var(--gold); color:#1a1206;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .wrap{max-width:860px; margin:0 auto; padding:0 26px; position:relative; z-index:1;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,18,27,0.82); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:860px; margin:0 auto; padding:18px 26px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'Fraunces',serif; font-weight:600; font-size:19px;
+    text-decoration:none; letter-spacing:.01em;
+  }
+  .brand em{ color:var(--gold); font-style:italic; }
+  nav ul{ list-style:none; display:flex; gap:26px; margin:0; padding:0; }
+  nav ul a{
+    text-decoration:none; font-size:14px; color:var(--ink-dim);
+    position:relative; padding-bottom:3px;
+  }
+  nav ul a::after{
+    content:''; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:var(--gold); transform:scaleX(0); transform-origin:right;
+    transition:transform .25s ease;
+  }
+  nav ul a:hover{ color:var(--ink); }
+  nav ul a:hover::after{ transform:scaleX(1); transform-origin:left; }
+  nav ul li.current a{ color:var(--gold); }
+
+  @media (max-width:560px){
+    .nav-inner{ flex-direction:column; align-items:flex-start; gap:12px; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:76px 0 40px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.12em;
+    color:var(--teal); text-transform:uppercase; margin:0 0 18px;
+  }
+  h1{
+    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(2.2rem,5vw,3.2rem);
+    margin:0 0 26px; letter-spacing:-.01em; color:var(--ink);
+  }
+  .pull{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    font-size:clamp(1.1rem,2.4vw,1.3rem); color:var(--ink-dim);
+    max-width:42ch; border-left:2px solid var(--gold); padding-left:22px;
+    margin:0 0 30px;
+  }
+
+  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:52px; }
+  .btn{
+    font-family:'IBM Plex Mono',monospace; font-size:13px;
+    display:inline-flex; align-items:center; gap:9px;
+    padding:12px 20px; border-radius:9px; text-decoration:none;
+    border:1px solid var(--line); color:var(--ink);
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .btn:hover{ border-color:var(--gold); transform:translateY(-1px); background:var(--panel-2); }
+  .btn-primary{ background:var(--gold); border-color:var(--gold); color:#1a1206; font-weight:600; }
+  .btn-primary:hover{ background:#f4bb6a; }
+  .btn-primary::after{ content:'→'; transition:transform .15s ease; }
+  .btn-primary:hover::after{ transform:translateX(3px); }
+
+  /* ---------- stat counters ---------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+    padding:30px 0 46px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    margin-bottom:56px;
+  }
+  .stat b{
+    font-family:'Fraunces',serif; font-size:2.1rem; font-weight:600; color:var(--ink);
+    display:block;
+  }
+  .stat span{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+    letter-spacing:.05em; text-transform:uppercase;
+  }
+  @media (max-width:600px){ .stats{ grid-template-columns:1fr; gap:26px; } }
+
+  /* ---------- focus cards ---------- */
+  section{ padding-bottom:60px; }
+  .section-label{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);
+    letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;
+  }
+  h2{
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.7rem; margin:0 0 34px;
+  }
+
+  .focus-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:700px){ .focus-grid{ grid-template-columns:1fr; } }
+  .focus-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 22px; transition:border-color .2s ease, transform .2s ease;
+  }
+  .focus-card:hover{ border-color:var(--teal); transform:translateY(-3px); }
+  .focus-card .mark{
+    width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    background:var(--panel-2); color:var(--gold); font-family:'Fraunces',serif; font-style:italic; margin-bottom:16px;
+  }
+  .focus-card h3{ font-family:'Inter'; font-size:15.5px; font-weight:600; margin:0 0 8px; color:var(--ink); }
+  .focus-card p{ font-size:13.8px; color:var(--muted); margin:0; }
+
+  /* ---------- path preview ---------- */
+  .path{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:8px; margin-bottom:0;
+  }
+  .path-row{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:16px 18px; border-radius:9px; text-decoration:none; color:var(--ink);
+    transition:background .18s ease;
+  }
+  .path-row:hover{ background:var(--panel-2); }
+  .path-row + .path-row{ border-top:1px solid var(--line); }
+  .path-left{ display:flex; align-items:center; gap:14px; }
+  .path-num{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); }
+  .path-name{ font-size:14.5px; font-weight:500; }
+  .path-arrow{ font-family:'IBM Plex Mono',monospace; color:var(--muted); transition:color .18s ease; }
+  .path-row:hover .path-arrow{ color:var(--gold); }
+
+  /* ---------- reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ---------- closing CTA ---------- */
+  .cta{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:38px 34px; margin-bottom:0; text-align:left;
+  }
+  .cta h2{ margin-bottom:10px; }
+  .cta p{ color:var(--muted); max-width:52ch; margin-bottom:24px; font-size:14.5px; }
+
+  footer{ border-top:1px solid var(--line); padding:24px 0 34px; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+  .footer-row p{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted); margin:0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="home" class="brand">nafees<em>.</em>dev</a>
+    <nav>
+      <ul>
+        <li class="current"><a href="home">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="courses">Courses</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="padding-bottom:0;">
+    <p class="eyebrow reveal in">free devops education</p>
+    <h1 class="reveal in">Infrastructure skills,<br>taught the way I wish<br>someone had taught me.</h1>
+    <p class="pull reveal in">No paywalls, no "buy my course" upsells halfway through a video. Just the DevOps, cloud and automation skills you need — built around real projects instead of slideware.</p>
+
+    <div class="btn-row reveal in">
+      <a href="courses" class="btn btn-primary">Start learning</a>
+      <a href="about" class="btn">Who's behind this</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal"><b>5</b><span>Free learning tracks</span></div>
+      <div class="stat reveal"><b>10+</b><span>Hands-on playlists</span></div>
+      <div class="stat reveal"><b>$0</b><span>Cost to learn</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label reveal">what you'll actually learn</p>
+    <h2 class="reveal">Skills that show up in real job postings</h2>
+    <div class="focus-grid">
+      <div class="focus-card reveal">
+        <span class="mark">C</span>
+        <h3>Cloud &amp; IaC</h3>
+        <p>AWS, Azure and Terraform, taught by standing up real infrastructure and tearing it back down.</p>
+      </div>
+      <div class="focus-card reveal">
+        <span class="mark">A</span>
+        <h3>Automation</h3>
+        <p>Ansible and GitOps workflows — the patterns that keep production systems from depending on any one person.</p>
+      </div>
+      <div class="focus-card reveal">
+        <span class="mark">O</span>
+        <h3>Operations</h3>
+        <p>Troubleshooting Kubernetes the way you'll actually encounter it: at the worst possible time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label reveal">where to start</p>
+    <h2 class="reveal">Pick up the path</h2>
+    <div class="path reveal">
+      <a class="path-row" href="courses">
+        <div class="path-left"><span class="path-num">01</span><span class="path-name">Fundamentals — Linux, Git, networking</span></div>
+        <span class="path-arrow">→</span>
+      </a>
+      <a class="path-row" href="courses">
+        <div class="path-left"><span class="path-num">02</span><span class="path-name">Cloud &amp; Infrastructure as Code</span></div>
+        <span class="path-arrow">→</span>
+      </a>
+      <a class="path-row" href="courses">
+        <div class="path-left"><span class="path-num">03</span><span class="path-name">Automation &amp; GitOps</span></div>
+        <span class="path-arrow">→</span>
+      </a>
+      <a class="path-row" href="courses">
+        <div class="path-left"><span class="path-num">04</span><span class="path-name">Operations &amp; troubleshooting</span></div>
+        <span class="path-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section style="padding-bottom:70px;">
+    <div class="cta reveal">
+      <h2>Ready to stop reading docs at 2am confused?</h2>
+      <p>Jump into the full curriculum, ordered the way you should actually learn it — or say hello first if you've got questions about where to start.</p>
+      <div class="btn-row" style="margin-bottom:0;">
+        <a href="courses" class="btn btn-primary">View the curriculum</a>
+        <a href="contact" class="btn">Join the community</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-row">
+    <p>© Nafees — built with more coffee than sleep</p>
+    <p>Subscribe for weekly DevOps drops</p>
+  </div>
+</footer>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealEls = document.querySelectorAll('.reveal');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealEls.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  });
+</script>
+
+</body>
+</html>
